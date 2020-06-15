@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Thu May 14 11:39:00 CST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0172-1143-90b8-000035a00760 
+on database directory /Users/tli/Documents/workspace/tw-local/telemetry/bookinfo/dubbo/edas-lightweight/data/derby-data with class loader org.springframework.boot.loader.LaunchedURLClassLoader@9629756 
+Loaded from jar:file:/Users/tli/Documents/workspace/tw-local/telemetry/bookinfo/dubbo/edas-lightweight/target/edas-lightweight.jar!/BOOT-INF/lib/derby-10.10.1.1.jar!/
+java.vendor=Oracle Corporation
+java.runtime.version=11.0.6+8-LTS
+user.dir=/Users/tli/Documents/workspace/tw-local/telemetry/bookinfo/dubbo
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.14.6
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
