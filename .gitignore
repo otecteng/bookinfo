@@ -3,3 +3,5 @@ dubbo/app
 dubbo/edas-lightweight
 dubbo/logs
 springcloud
+.idea/
+zipkin-server-with-mysql/mysql_data
