@@ -1,0 +1,9 @@
+rootProject.name = 'bookinfo'
+
+include 'productpage'
+include 'detail'
+include 'rating'
+include 'review'
+include 'order'
+include 'stock'
+include 'delivery'

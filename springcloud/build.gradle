@@ -1,0 +1,51 @@
+buildscript {
+    ext {
+        springBootVersion = '2.2.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    group = 'com.example'
+    version = ''
+    sourceCompatibility = '1.8'
+
+	repositories {
+		mavenCentral()
+		maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+	}
+
+    dependencyManagement {
+	    imports {
+		    mavenBom "org.springframework.cloud:spring-cloud-dependencies:Greenwich.SR3"
+	    }
+    }
+
+    dependencies {
+        // implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        // implementation 'org.springframework.boot:spring-boot-starter-web'
+        // implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+        // implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+        // developmentOnly 'org.springframework.boot:spring-boot-devtools'
+        // runtimeOnly 'com.h2database:h2'
+    //	implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'	
+    //	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+        // implementation 'io.opentracing.brave:brave-opentracing'
+        // implementation 'io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter:2.0.0'
+
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+    }
+}
