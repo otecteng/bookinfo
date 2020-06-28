@@ -9,7 +9,11 @@ services:
             - "3306:3306"
         volumes:
             - ./data/mysql:/var/lib/mysql
-      
+        deploy:
+            resources:
+                limits:
+                    memory: 256M
+
     rabbitmq:
         image: rabbitmq:3.8-management-alpine
         environment:
@@ -18,32 +22,103 @@ services:
         ports:
             - 15672:15672
             - 5672:5672
-    
+
+    eureka:
+        build: ./eureka
+        image: bookinfo-eureka
+        ports:
+            - 8761:8761
+        deploy:
+            resources:
+                limits:
+                    memory: 64M
+
+    productpage:
+        build: ./productpage
+        image: bookinfo-productpage
+        environment:
+            EUREKA: eureka
+        depends_on:
+            - eureka
+        ports:
+            - 8000:8000
+        deploy:
+            resources:
+                limits:
+                    memory: 128M
+    review:
+        build: ./review
+        image: bookinfo-review
+        environment:
+            EUREKA: eureka
+        depends_on:
+            - eureka
+        deploy:
+            resources:
+                limits:
+                    memory: 128M
+
+    rating:
+        build: ./rating
+        image: bookinfo-rating
+        environment:
+            EUREKA: eureka
+        depends_on:
+            - eureka
+        deploy:
+            resources:
+                limits:
+                    memory: 128M
+
+    detail:
+        build: ./detail
+        image: bookinfo-detail
+        environment:
+            EUREKA: eureka
+        depends_on:
+            - eureka
+        deploy:
+            resources:
+                limits:
+                    memory: 128M
+
     order:
         build: ./order
         image: bookinfo-order
         environment:
             RABBITMQ: rabbitmq
             MYSQL: db
-        depends_on: 
+        depends_on:
             - rabbitmq
             - db
         ports:
             - 8080:8080
+        deploy:
+            resources:
+                limits:
+                    memory: 128M
 
     stock:
         build: ./stock
         image: bookinfo-stock
         environment:
             RABBITMQ: rabbitmq
-        depends_on: 
+        depends_on:
             - rabbitmq
+        deploy:
+            resources:
+                limits:
+                    memory: 128M
 
     delivery:
         build: ./delivery
         image: bookinfo-delivery
         environment:
             RABBITMQ: rabbitmq
-        depends_on: 
+        depends_on:
             - rabbitmq
-    
+        deploy:
+            resources:
+                limits:
+                    memory: 128M
+

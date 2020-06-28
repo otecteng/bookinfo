@@ -1,12 +1,10 @@
+apply plugin: 'org.springframework.boot'
+
 configurations {
 	developmentOnly
 	runtimeClasspath {
 		extendsFrom developmentOnly
 	}
-}
-
-repositories {
-	mavenCentral()
 }
 
 dependencyManagement {

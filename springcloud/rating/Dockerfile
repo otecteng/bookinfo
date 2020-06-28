@@ -2,7 +2,7 @@ FROM openjdk:8-alpine
 
 ARG NAME=rating
 ARG VERSION=1.0.0
-ARG JAR_FILE=app.jar
+ARG JAR_FILE=rating.jar
 
 LABEL name=$NAME \
       version=$VERSION
@@ -30,4 +30,3 @@ USER java-app
 
 ENTRYPOINT ["/home/java-app/docker-entrypoint.sh"]
 
-EXPOSE 8080

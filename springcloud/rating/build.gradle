@@ -1,12 +1,9 @@
+apply plugin: 'org.springframework.boot'
 configurations {
 	developmentOnly
 	runtimeClasspath {
 		extendsFrom developmentOnly
 	}
-}
-
-repositories {
-	mavenCentral()
 }
 
 dependencyManagement {
@@ -24,8 +21,8 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 //	implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'	
 //	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
-	implementation 'io.opentracing.brave:brave-opentracing'
-	implementation 'io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter:2.0.0'
+//	implementation 'io.opentracing.brave:brave-opentracing'
+//	implementation 'io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter:2.0.0'
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

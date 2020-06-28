@@ -1,6 +1,6 @@
 ### application topo
-    productpage -|-> review -> rating  
-             |-> detail  
+    productpage -   |-> review  -> rating  
+                    |-> detail  
 
     order   -> mysql  
             -> rabbitmq  -  |->     stock   
@@ -41,7 +41,7 @@ check eureka service status,open http://localhost:8080
 
 ### testing  
 ```
-curl http://localhost:4567/api/v1/products/1
+curl -H "Accept: application/json" -H "Content-type: application/json" -X GET http://localhost:8000/api/v1/products/1
 curl http://localhost:4567/api/v1/products/1/review
 curl POST http://localhost:4567/api/v1/order
 curl -H "Accept: application/json" -H "Content-type: application/json" -X POST http://localhost:8080/api/order -d '{"product":"book","count":1}'
