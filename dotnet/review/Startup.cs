@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using review.Data;
+using Microsoft.EntityFrameworkCore;
 namespace review
 {
     public class Startup
@@ -23,6 +24,9 @@ namespace review
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            //通过调用 DbContextOptions 对象中的一个方法将连接字符串名称传递到上下文
+            services.AddDbContext<MvcReviewContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("MvcReviewContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
