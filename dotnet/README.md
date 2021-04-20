@@ -1,3 +1,2 @@
 ### application topo
-productpage -|-> review -> rating
-             |-> detail
+productpage -> review
