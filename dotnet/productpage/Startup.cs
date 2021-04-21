@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Elastic.Apm.NetCoreAll;
 namespace productpage
 {
     public class Startup
@@ -33,11 +33,13 @@ namespace productpage
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseAllElasticApm(Configuration);
             }
             else
             {
                 //app.UseExceptionHandler("/Home/Error");
                 app.UseDeveloperExceptionPage();
+                app.UseAllElasticApm(Configuration);
             }
             app.UseStaticFiles();
 

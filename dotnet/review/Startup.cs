@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using review.Data;
 using Microsoft.EntityFrameworkCore;
+using Elastic.Apm.NetCoreAll;
 namespace review
 {
     public class Startup
@@ -52,11 +53,13 @@ namespace review
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseAllElasticApm(Configuration);
             }
             else
             {
                 //app.UseExceptionHandler("/Home/Error");
                 app.UseDeveloperExceptionPage();
+                app.UseAllElasticApm(Configuration);
             }
             app.UseStaticFiles();
 
