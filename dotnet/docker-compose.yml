@@ -12,3 +12,11 @@ services:
       MYSQL_ROOT_PASSWORD: 123456
     ports:
       - "3306:3306"
+  productpage:
+      image: docker/productpage
+      ports:
+        - "5000:80"
+  review:
+      image: docker/review
+      ports:
+        - "5001:80"

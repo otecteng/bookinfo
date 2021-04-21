@@ -1,0 +1,3 @@
+#!/bin/zsh
+dotnet publish --framework net5.0 --configuration Release --output dist
+docker build . -t docker/review -f Dockerfile

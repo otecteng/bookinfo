@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,25 @@ namespace review.Controllers
             }
 
             return View(review);
+        }
+        //通过Json查询review信息
+        public async Task<IActionResult> DetailsJson (int id)
+        {if (id == 0)
+            {
+                return NotFound();
+            }
+
+            var review = await _context.Review
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (review == null)
+            {
+                return NotFound();
+            }
+
+            return Json(review,new JsonSerializerOptions
+            {
+                WriteIndented = true,
+            });
         }
 
         // GET: Reviews/Create
