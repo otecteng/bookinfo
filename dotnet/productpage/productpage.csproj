@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Com.Ctrip.Framework.Apollo.Configuration" Version="2.4.1" />
     <PackageReference Include="Elastic.Apm.NetCoreAll" Version="1.9.0" />
   </ItemGroup>
 

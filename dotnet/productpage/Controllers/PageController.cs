@@ -27,7 +27,7 @@ namespace productpage.Controllers
         {
             if(_env.IsDevelopment())
             {
-                return "Dev env";
+                return "Your are in the Development envs";
             }
             else
             {

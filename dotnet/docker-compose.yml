@@ -14,9 +14,13 @@ services:
       - "3306:3306"
   productpage:
       image: docker/productpage
-      ports:
-        - "5000:80"
+      expose:
+        - "80"
   review:
       image: docker/review
+      expose: 
+        - "80"
+  nginx:
+      image: gateway
       ports:
-        - "5001:80"
+        - "80:80"
