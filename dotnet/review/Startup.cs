@@ -32,35 +32,21 @@ namespace review
             services.AddDbContext<MvcReviewContext>(options =>
         {
             var connectionString = Configuration.GetConnectionString("MvcReviewContext");
-
+            options.UseMySql(connectionString,Microsoft.EntityFrameworkCore.ServerVersion.FromString("5.7.34-mysql"));
+            //options.UseSqlite(connectionString);
             
-            if (Environment.IsDevelopment())
-            {
-                options.UseMySql(connectionString,Microsoft.EntityFrameworkCore.ServerVersion.FromString("5.7.34-mysql"));
-                //options.UseSqlite(connectionString);
-            }
-            else
-            {
-                
-                options.UseMySql(connectionString,Microsoft.EntityFrameworkCore.ServerVersion.FromString("5.7.34-mysql"));
-            }
+           
         });
+            services.AddNacosAspNetCore(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseAllElasticApm(Configuration);
-            }
-            else
-            {
-                //app.UseExceptionHandler("/Home/Error");
-                app.UseDeveloperExceptionPage();
-                app.UseAllElasticApm(Configuration);
-            }
+            
+            app.UseDeveloperExceptionPage();
+            app.UseAllElasticApm(Configuration);
+            
             app.UseStaticFiles();
 
             app.UseRouting();

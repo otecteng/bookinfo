@@ -20,6 +20,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="nacos-sdk-csharp" Version="1.0.3" />
+    <PackageReference Include="nacos-sdk-csharp.AspNetCore" Version="1.0.3" />
+    <PackageReference Include="nacos-sdk-csharp.Extensions.Configuration" Version="1.0.3" />
+    <PackageReference Include="nacos-sdk-csharp.IniParser" Version="1.0.3" />
+    <PackageReference Include="nacos-sdk-csharp.YamlParser" Version="1.0.3" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0-alpha.2" />
   </ItemGroup>
 

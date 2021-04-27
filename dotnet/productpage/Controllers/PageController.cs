@@ -9,6 +9,7 @@ using productpage.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.Net.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace productpage.Controllers
 {
@@ -16,6 +17,7 @@ namespace productpage.Controllers
     {
         private readonly IHttpClientFactory _clientFactory;
         private readonly IHostingEnvironment _env;
+        
         private readonly IConfiguration _configuration;
         public PageController(IHttpClientFactory clientFactory,IHostingEnvironment environment, IConfiguration configuration)
         {
@@ -23,6 +25,8 @@ namespace productpage.Controllers
             _env = environment;
             _configuration = configuration;
         }
+        
+        [Authorize]
         public string Index()
         {
             if(_env.IsDevelopment())
@@ -52,7 +56,6 @@ namespace productpage.Controllers
             }
             
         }
-
        
     }
 }

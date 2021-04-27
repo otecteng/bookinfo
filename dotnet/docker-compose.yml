@@ -24,3 +24,7 @@ services:
       image: gateway
       ports:
         - "80:80"
+      volumes:
+        - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+        - ./nginx/nginx/conf.d:/etc/nginx/conf.d
+        - ./nginx/log:/var/log/nginx

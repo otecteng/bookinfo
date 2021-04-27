@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using productpage.Models;
-
+using Microsoft.AspNetCore.Authorization;
 namespace productpage.Controllers
 {
     public class HomeController : Controller

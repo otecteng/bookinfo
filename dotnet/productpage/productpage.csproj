@@ -7,6 +7,15 @@
   <ItemGroup>
     <PackageReference Include="Com.Ctrip.Framework.Apollo.Configuration" Version="2.4.1" />
     <PackageReference Include="Elastic.Apm.NetCoreAll" Version="1.9.0" />
+    <PackageReference Include="IdentityModel" Version="5.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.5" />
+    <PackageReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.2" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.10.2" />
+     <PackageReference Include="nacos-sdk-csharp" Version="1.0.3" />
+    <PackageReference Include="nacos-sdk-csharp.AspNetCore" Version="1.0.3" />
+    <PackageReference Include="nacos-sdk-csharp.Extensions.Configuration" Version="1.0.3" />
+    <PackageReference Include="nacos-sdk-csharp.IniParser" Version="1.0.3" />
+    <PackageReference Include="nacos-sdk-csharp.YamlParser" Version="1.0.3" />
   </ItemGroup>
 
 </Project>
