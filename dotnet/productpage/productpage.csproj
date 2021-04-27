@@ -16,6 +16,7 @@
     <PackageReference Include="nacos-sdk-csharp.Extensions.Configuration" Version="1.0.3" />
     <PackageReference Include="nacos-sdk-csharp.IniParser" Version="1.0.3" />
     <PackageReference Include="nacos-sdk-csharp.YamlParser" Version="1.0.3" />
+    <PackageReference Include="StackExchange.Redis" Version="2.2.4" />
   </ItemGroup>
 
 </Project>

@@ -16,6 +16,7 @@ using Elastic.Apm.NetCoreAll;
 using IdentityModel;
 using Nacos.AspNetCore.V2;
 using Nacos.V2.DependencyInjection;
+using StackExchange.Redis;
 namespace productpage
 {
     public class Startup
@@ -33,12 +34,19 @@ namespace productpage
         {
             services.AddControllersWithViews();
             services.AddHttpClient();
-            var key = "pandasandalbuggybrokenrock";
+            //注入Redis
+            IConnectionMultiplexer redis = ConnectionMultiplexer.Connect("10.208.20.73");
+            services.AddScoped(s => redis.GetDatabase());
+            //注入Redis 完毕
+
+            //使用JwtToken进行鉴权时需要key，使用自定义的基于Guid的JwtToken的时候，key不需要。
+            //var key = "pandasandalbuggybrokenrock";
+            //自定义的token生成与鉴权 
             services.AddAuthentication("Basic").
                 AddScheme<BasicAuthenticationOptions, CustomAuthenticationHandler>("Basic",null);
             services.AddSingleton<ICustomAuthenticationManager, CustomAuthenticationManager>();
-            //services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
-            //===bearer token相关配置开始===
+            //自定义的token生成与鉴权 完毕
+            //===基于JWT的bearer token相关配置开始===
             
             // services.AddAuthentication(x =>
             // {
@@ -60,7 +68,7 @@ namespace productpage
             //     };
             // });
             
-            //===bearer token相关配置结束===
+            //===基于JWT的bearer token相关配置结束===
             //===Nacos相关配置===
             services.AddNacosAspNetCore(Configuration);
             services.AddNacosV2Naming(x =>

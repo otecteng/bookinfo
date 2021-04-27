@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Linq;
 using System.Net.Sockets;
+using StackExchange.Redis;
 namespace productpage.Controllers
 {
     [Authorize]
@@ -17,11 +18,12 @@ namespace productpage.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly ICustomAuthenticationManager customAuthenticationManager;
-        //private readonly IHttpContextAccessor httpContextAccessor;
-        public ValuesController(ICustomAuthenticationManager customAuthenticationManager)
+        private readonly IDatabase database;
+        
+        public ValuesController(ICustomAuthenticationManager customAuthenticationManager, IDatabase database)
         {
             this.customAuthenticationManager = customAuthenticationManager;
-            //this.httpContextAccessor = httpContextAccessor;
+            this.database = database;
         }
         [HttpGet]
         public IEnumerable<string> Get()
@@ -29,11 +31,25 @@ namespace productpage.Controllers
             
             return new string[] {"value"};
         }
+
+        [AllowAnonymous]
+        [HttpGet("getfromredis")]
+        public string GetFromRedis([FromQuery]string key)
+        {
+            return database.StringGet(key);
+        }
+        [AllowAnonymous]
+        [HttpPost("settoredis")]
+        public void SetToRedis([FromBody]KeyValuePair<string, string> keyValue)
+        {
+            database.StringSet(keyValue.Key, keyValue.Value);
+        }
+
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]UserCred userCred)
         {
-            var token = customAuthenticationManager.Authenticate(userCred.Username, userCred.Password);
+            var token = customAuthenticationManager.Authenticate(userCred.Username, userCred.Password, this.database);
             if (token == null)
                 return Unauthorized();
             return Ok(token);

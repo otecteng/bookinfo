@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text.Encodings.Web;
 using System.Security.Claims;
+using StackExchange.Redis;
 namespace productpage
 {
     public class BasicAuthenticationOptions : AuthenticationSchemeOptions
@@ -16,13 +17,16 @@ namespace productpage
     public class CustomAuthenticationHandler : AuthenticationHandler<BasicAuthenticationOptions>
     {
         private readonly ICustomAuthenticationManager customAuthenticationManager;
+        private readonly IDatabase database;
         public CustomAuthenticationHandler(IOptionsMonitor<BasicAuthenticationOptions> options,
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock,
-        ICustomAuthenticationManager customAuthenticationManager) : base (options,logger,encoder,clock)
+        ICustomAuthenticationManager customAuthenticationManager,
+        IDatabase database) : base (options,logger,encoder,clock)
         {
             this.customAuthenticationManager = customAuthenticationManager;
+            this.database = database;
         }
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
@@ -49,14 +53,23 @@ namespace productpage
 
         private AuthenticateResult ValidateToken(string token)
         {
-            var validatedToken =  customAuthenticationManager.Tokens.FirstOrDefault(t => t.Key == token);
-            if (validatedToken.Key == null)
+            
+
+            // var validatedToken =  customAuthenticationManager.Tokens.FirstOrDefault(t => t.Key == token);
+            // if (validatedToken.Key == null)
+            // {
+            //     return AuthenticateResult.Fail("Unauthorize");
+            // }
+            string username = database.StringGet(token);
+            if(string.IsNullOrEmpty(username))
             {
                 return AuthenticateResult.Fail("Unauthorize");
             }
+
+            //鉴权通过
             var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, validatedToken.Value),
+                    new Claim(ClaimTypes.Name, username),
                 };
  
             var identity = new ClaimsIdentity(claims, Scheme.Name);
