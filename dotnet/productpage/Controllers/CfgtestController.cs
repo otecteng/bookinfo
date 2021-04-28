@@ -27,7 +27,8 @@ namespace productpage.Controllers
             string flag = _configuration.GetValue<string>("test");
             if(flag.Equals("on"))
             {
-                return "新功能开放";
+                string ret = _configuration.GetValue<string>("ElasticApm");
+                return ret;
             }
             else
             {
@@ -35,6 +36,7 @@ namespace productpage.Controllers
             }
 
         }
+       
 
         
     }

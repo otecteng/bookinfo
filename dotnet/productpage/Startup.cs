@@ -35,7 +35,7 @@ namespace productpage
             services.AddControllersWithViews();
             services.AddHttpClient();
             //注入Redis
-            IConnectionMultiplexer redis = ConnectionMultiplexer.Connect("10.208.20.73");
+            IConnectionMultiplexer redis = ConnectionMultiplexer.Connect(Configuration.GetValue<string>("redis_url"));
             services.AddScoped(s => redis.GetDatabase());
             //注入Redis 完毕
 

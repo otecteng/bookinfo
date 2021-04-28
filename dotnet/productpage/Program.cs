@@ -17,6 +17,12 @@ namespace productpage
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration((hostingContext, builder) =>
+                {
+                    LogManager.UseConsoleLogging(LogLevel.Trace);
+
+                    builder.AddApollo(builder.Build().GetSection("Apollo")).AddDefault();
+                })
             .ConfigureAppConfiguration((context, builder) =>
         {
             var c = builder.Build();
@@ -28,12 +34,6 @@ namespace productpage
             // builder.AddNacosConfiguration(c.GetSection("NacosConfig"), Nacos.IniParser.IniConfigurationStringParser.Instance);
             // builder.AddNacosConfiguration(c.GetSection("NacosConfig"), Nacos.YamlParser.YamlConfigurationStringParser.Instance);
         })
-            .ConfigureAppConfiguration((hostingContext, builder) =>
-                {
-                    LogManager.UseConsoleLogging(LogLevel.Trace);
-
-                    builder.AddApollo(builder.Build().GetSection("Apollo")).AddDefault();
-                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
