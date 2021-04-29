@@ -46,12 +46,12 @@ namespace productpage.Controllers
             var client = _clientFactory.CreateClient();
             
             client.BaseAddress = new Uri(baseUrl);
-            return baseUrl.ToString();
+            
             //string result = await client.GetStringAsync("/");
-            // string result = await client.GetStringAsync("/Reviews/Detailsjson/" + bookid.ToString());
-            // result = result + "\n" + "This result is from:" + baseUrl.ToString();
+            string result = await client.GetStringAsync("/Reviews/Detailsjson/" + bookid.ToString());
+            result = result + "\n" + "This result is from:" + baseUrl.ToString();
 
-            // return result;
+            return result;
            
             
         }
