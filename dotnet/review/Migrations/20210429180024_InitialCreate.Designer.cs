@@ -9,7 +9,7 @@ using review.Data;
 namespace review.Migrations
 {
     [DbContext(typeof(MvcReviewContext))]
-    [Migration("20210420070858_InitialCreate")]
+    [Migration("20210429180024_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

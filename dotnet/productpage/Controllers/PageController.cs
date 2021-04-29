@@ -50,7 +50,7 @@ namespace productpage.Controllers
             }
             else
             {
-                client.BaseAddress = new Uri("http://52.130.67.24:5001/");
+                client.BaseAddress = new Uri("http://52.130.67.24/review");
                 //string result = await client.GetStringAsync("/");
                 return await client.GetStringAsync("/Reviews/Detailsjson/" + bookid.ToString());
             }
