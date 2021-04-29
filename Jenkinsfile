@@ -60,6 +60,7 @@ pipeline{
         }
         failure{
             echo "========pipeline execution failed========"
+            //sudo docker run -p 80:80 -v /nginx/nginx.conf:/etc/nginx/nginx.conf -v /nginx/nginx/conf.d:/etc/nginx/conf.d -v /nginx/log:/var/log/nginx -d registry.cn-hangzhou.aliyuncs.com/book_info/gateway:1.0
         }
     }
 }
