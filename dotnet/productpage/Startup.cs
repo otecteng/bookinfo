@@ -73,7 +73,7 @@ namespace productpage
             services.AddNacosAspNetCore(Configuration);
             services.AddNacosV2Naming(x =>
             {
-                x.ServerAddresses = new System.Collections.Generic.List<string> { "http://localhost:8848/" };
+                x.ServerAddresses = new System.Collections.Generic.List<string> { "http://40.72.115.89:8848/" };
                 x.EndPoint = "";
                 // swich to use http or rpc
                 x.NamingUseRpc = true;
