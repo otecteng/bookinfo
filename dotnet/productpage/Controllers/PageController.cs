@@ -44,13 +44,13 @@ namespace productpage.Controllers
             var client = _clientFactory.CreateClient();
             if(_env.IsDevelopment())
             {
-                client.BaseAddress = new Uri("http://localhost:5001/");
+                client.BaseAddress = new Uri("http://127.0.0.1:5001/");
                 //string result = await client.GetStringAsync("/");
                 return await client.GetStringAsync("/Reviews/Detailsjson/" + bookid.ToString());
             }
             else
             {
-                client.BaseAddress = new Uri("http://review:80/");
+                client.BaseAddress = new Uri("http://127.0.0.1:5001/");
                 //string result = await client.GetStringAsync("/");
                 return await client.GetStringAsync("/Reviews/Detailsjson/" + bookid.ToString());
             }
