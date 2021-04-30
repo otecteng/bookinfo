@@ -36,7 +36,7 @@ namespace productpage
             services.AddHttpClient();
             //注入Redis
             IConnectionMultiplexer redis = ConnectionMultiplexer.Connect(Configuration.GetValue<string>("redis_url"));
-            services.AddScoped(s => redis.GetDatabase());
+            services.AddSingleton(s => redis.GetDatabase());
             //注入Redis 完毕
 
             //使用JwtToken进行鉴权时需要key，使用自定义的基于Guid的JwtToken的时候，key不需要。
@@ -73,7 +73,7 @@ namespace productpage
             services.AddNacosAspNetCore(Configuration);
             services.AddNacosV2Naming(x =>
             {
-                x.ServerAddresses = new System.Collections.Generic.List<string> { "http://40.72.115.89:8848/" };
+                x.ServerAddresses = new System.Collections.Generic.List<string> { "http://:8848/" };
                 x.EndPoint = "";
                 // swich to use http or rpc
                 x.NamingUseRpc = true;
