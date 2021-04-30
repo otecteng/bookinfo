@@ -31,11 +31,10 @@ namespace review
             //通过调用 DbContextOptions 对象中的一个方法将连接字符串名称传递到上下文
             services.AddDbContext<MvcReviewContext>(options =>
         {
-            var connectionString = Configuration.GetConnectionString("MvcReviewContext");
+            var connectionString = Configuration.GetValue<string>("ConnectionStrings");
+            //System.Console.WriteLine("dbdebug:"+ Configuration.GetValue<string>("ConnectionStrings"));
             options.UseMySql(connectionString,Microsoft.EntityFrameworkCore.ServerVersion.FromString("5.7.34-mysql"));
             //options.UseSqlite(connectionString);
-            
-           
         });
             services.AddNacosAspNetCore(Configuration);
         }
