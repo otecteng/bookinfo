@@ -44,8 +44,10 @@ namespace review
         {
             
             app.UseDeveloperExceptionPage();
-            app.UseAllElasticApm(Configuration);
-            
+            if(Configuration.GetValue<string>("APM").Equals("true"))
+            {
+                app.UseAllElasticApm(Configuration);
+            }   
             app.UseStaticFiles();
 
             app.UseRouting();
