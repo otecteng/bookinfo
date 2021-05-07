@@ -32,7 +32,7 @@ namespace review
             services.AddDbContext<MvcReviewContext>(options =>
         {
             var connectionString = Configuration.GetValue<string>("ConnectionStrings");
-            //System.Console.WriteLine("dbdebug:"+ Configuration.GetValue<string>("ConnectionStrings"));
+            System.Console.WriteLine("dbdebug:"+ Configuration.GetValue<string>("ConnectionStrings"));
             options.UseMySql(connectionString,Microsoft.EntityFrameworkCore.ServerVersion.FromString("5.7.34-mysql"));
             //options.UseSqlite(connectionString);
         });
