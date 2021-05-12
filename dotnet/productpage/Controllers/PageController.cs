@@ -41,10 +41,11 @@ namespace productpage.Controllers
         }
         public async Task<string> GetReview(int bookid)
         {
+            //此方法已弃用，请通过nacospage调用服务
             var client = _clientFactory.CreateClient();
             if(_env.IsDevelopment())
             {
-                client.BaseAddress = new Uri("http://127.0.0.1:5001/");
+                client.BaseAddress = new Uri("http://localhost:5001/");
                 //string result = await client.GetStringAsync("/");
                 return await client.GetStringAsync("/Reviews/Detailsjson/" + bookid.ToString());
             }

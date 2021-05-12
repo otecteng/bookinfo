@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +16,6 @@ using System.Text;
 using Elastic.Apm.NetCoreAll;
 using IdentityModel;
 using Nacos.AspNetCore.V2;
-using Nacos.V2.DependencyInjection;
 using StackExchange.Redis;
 namespace productpage
 {
@@ -70,15 +70,11 @@ namespace productpage
             
             //===基于JWT的bearer token相关配置结束===
             //===Nacos相关配置===
-            services.AddNacosAspNetCore(Configuration);
-            services.AddNacosV2Naming(x =>
-            {
-                x.ServerAddresses = new System.Collections.Generic.List<string> { "http://:8848/" };
-                x.EndPoint = "";
-                // swich to use http or rpc
-                x.NamingUseRpc = true;
-            });
+            services.AddNacosAspNet(Configuration);
             //===Nacos相关配置结束===
+            //注入健康检查服务
+            services.AddHealthChecks()
+                    .AddCheck<RedisHealthCheck>("Redis_Check");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,7 +89,6 @@ namespace productpage
                 app.UseAllElasticApm(Configuration);
             } 
             app.UseStaticFiles();
-
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -102,6 +97,7 @@ namespace productpage
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHealthChecks("/health");
             });
         }
     }
